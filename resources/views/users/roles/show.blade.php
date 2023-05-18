@@ -55,7 +55,7 @@
                 autoWidth: false,
                 bPaginate: false,
                 bFilter: true,
-                ajax: "{{ route('users.permissions.index', ['role_id' => $role->id]) }}",
+                ajax: "{{ route('users.roles.show', $role->id) }}",
                 columns: [{
                         data: 'id',
                         name: 'id'

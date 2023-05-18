@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Spatie\Permission\Models\Role; 
 use DataTables;
 use Spatie\Permission\Models\Permission;
+use Yajra\DataTables\Contracts\DataTable;
 
 class RolesController extends Controller
 {
@@ -64,8 +65,12 @@ class RolesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Role $role)
+    public function show(Request $request, Role $role)
     {
+        if($request->ajax())
+        {
+            return $this->getRolesPermissions($role);
+        }
         return view('users.roles.show')->with(['role' => $role]);
     }
 
@@ -140,5 +145,11 @@ class RolesController extends Controller
                     return $action;
                 })
                 ->make('true');
+    }
+
+    private function getRolesPermissions($role)
+    {
+        $permissions = $role->permissions; 
+        return DataTables::of($permissions)->make('true');
     }
 }
