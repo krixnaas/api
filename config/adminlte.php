@@ -304,7 +304,7 @@ return [
         // Sidebar items:
         [
             'text' => 'Dashboard',
-            'url' => 'home',
+            'route' => 'dashboard',
             'icon' => 'fas fa-fw fa-home'
         ],
         [
@@ -313,15 +313,18 @@ return [
             'submenu'      =>[
                 [
                     'text' => 'All',
-                    'url' => 'users',
+                    'route' => 'users.index',
+                    'active' => ['users', 'users/*'],
                 ],
                 [
                     'text' => 'Roles',
-                    'url' => 'roles',
+                    'route' => 'users.roles.index',
+                    'active' => ['users/roles/*'],
                 ],
                 [
                     'text' => 'Permissions',
-                    'url' => 'permissions',
+                    'route' => 'users.permissions.index',
+                    'active' => ['users/permissions/*'],
                 ],
             ]
            
