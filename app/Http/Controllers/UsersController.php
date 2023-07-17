@@ -6,6 +6,7 @@ use DataTables;
 use Carbon\Carbon;
 use App\Models\User; 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Laravel\Ui\Presets\React;
 use Spatie\Permission\Models\Role;
@@ -154,8 +155,14 @@ class UsersController extends Controller
                 })
                 ->addColumn('action', function($row){
                     $action = ""; 
-                    $action.="<a class='btn btn-xs btn-warning' id='btnEdit' href='".route('users.edit', $row->id)."'><i class='fas fa-edit'></i></a>"; 
-                    $action.=" <button class='btn btn-xs btn-outline-danger' id='btnDel' data-id='".$row->id."'><i class='fas fa-trash'></i></button>"; 
+                    if(Auth::user()->can('users.edit'))
+                    {
+                        $action.="<a class='btn btn-xs btn-warning' id='btnEdit' href='".route('users.edit', $row->id)."'><i class='fas fa-edit'></i></a>"; 
+                    }
+                    if(Auth::user()->can('users.destroy'))
+                    {
+                        $action.=" <button class='btn btn-xs btn-outline-danger' id='btnDel' data-id='".$row->id."'><i class='fas fa-trash'></i></button>"; 
+                    }
                     return $action;
                 })
                 ->rawColumns(['name', 'date','roles', 'action'])->make('true');

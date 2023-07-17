@@ -1,5 +1,7 @@
 <?php
 
+use App\Filters\MenuFilter;
+
 return [
 
     /*
@@ -340,7 +342,15 @@ return [
             'url'  => 'settings',
             'icon' => 'fas fa-fw fa-cogs',
         ],
-        
+        // Sidebar items:
+        [
+            'text' => 'Test',
+            'route' => 'test',
+        ],
+        [
+            'text' => 'Test2',
+            'route' => 'test2',
+        ],
     ],
 
     /*
@@ -356,13 +366,14 @@ return [
     */
 
     'filters' => [
-        JeroenNoten\LaravelAdminLte\Menu\Filters\GateFilter::class,
+        //JeroenNoten\LaravelAdminLte\Menu\Filters\GateFilter::class,
         JeroenNoten\LaravelAdminLte\Menu\Filters\HrefFilter::class,
         JeroenNoten\LaravelAdminLte\Menu\Filters\SearchFilter::class,
         JeroenNoten\LaravelAdminLte\Menu\Filters\ActiveFilter::class,
         JeroenNoten\LaravelAdminLte\Menu\Filters\ClassesFilter::class,
         JeroenNoten\LaravelAdminLte\Menu\Filters\LangFilter::class,
         JeroenNoten\LaravelAdminLte\Menu\Filters\DataFilter::class,
+        MenuFilter::class,
     ],
 
     /*
