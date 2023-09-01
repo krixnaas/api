@@ -23,8 +23,6 @@ class CreateSuperUserSeeder extends Seeder
             'password' => 'Password.1'
         ]);
         $role = Role::create(['name' => 'superuser']); 
-        $permissions = Permission::pluck('id', 'id')->all();
-        $role->syncPermissions($permissions); 
         $user->assignRole([$role->id]);
     }
 }

@@ -45,7 +45,7 @@ class PermissionsController extends Controller
         $this->validate($request, [
             'name' => 'required|unique:permissions,name'
         ]);
-        $permission = Permission::create(["name" => strtolower(tirm($request->name))]);
+        $permission = Permission::create(["name" => strtolower(trim($request->name))]);
         if($permission)
         {
 
